@@ -29,6 +29,11 @@ namespace classwork_GroupAgregate
 
             var countHowMany = books.Count();
             Console.WriteLine("Количество книг: {0}", countHowMany);
+            countHowMany = books.Count;// linq вариант
+            Console.WriteLine("Количество книг linq: {0}", countHowMany);
+
+
+
 
             var countHowManyyear2020 = books.Count(n=> n.Year>2020);
             Console.WriteLine("Количество книг c годом выпуска после 2020: {0}", countHowManyyear2020);
@@ -63,6 +68,7 @@ namespace classwork_GroupAgregate
             Console.WriteLine("Сортировка по самой дорогой книге");
             var bookGroup2 = from a in books
                             group a by a.Autor into g
+                            orderby g.Max(book => book.Price) descending
                             select g.OrderByDescending(book => book.Price).First();
 
             foreach (var book in bookGroup2)
